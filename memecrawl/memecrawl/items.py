@@ -11,6 +11,7 @@ import scrapy
 class MemecrawlItem(scrapy.Item):
     images = scrapy.Field()
     image_urls = scrapy.Field()
+
     image_names = scrapy.Field()
     
     # define the fields for your item here like:

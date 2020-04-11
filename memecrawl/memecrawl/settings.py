@@ -68,10 +68,19 @@ ROBOTSTXT_OBEY = True
 #    'memecrawl.pipelines.MemecrawlPipeline': 300,
 #}
 
-ITEM_PIPELINES = {'memecrawl.pipelines.MemecrawlPipeline': 1}
+ITEM_PIPELINES = {
+'memecrawl.pipelines.WrapperPipeline': 1,
+'memecrawl.pipelines.MemecrawlPipeline': 2
+}
+
 IMAGES_STORE = 'D:\CIS419\Memes'
-DOWNLOAD_DELAY = 0.25
-MEDIA_ALLOW_REDIRECTS = True
+
+DOWNLOAD_TIMEOUT = 1200
+
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 2,
+# }
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

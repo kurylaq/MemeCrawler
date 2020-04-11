@@ -4,18 +4,28 @@ from pathlib import Path
 
 from memecrawl.items import MemecrawlItem
 
+
+
 class MemeSpider(scrapy.Spider):
     name = "meme"
 
     def start_requests(self):
-        urls = [
-            'https://imgflip.com/memetemplates'
-        ]
+        self.num_memes = 5
+
+        # urls = [
+        #     'https://imgflip.com/memetemplates'
+        # ]
+
+        urls = ["https://imgflip.com/memetemplates?page=" + str(n+1) for n in range(self.num_memes)]
+
+        print(urls)
 
         self.base_url = "https://imgflip.com"
-        self.num_pages = 1
+        self.num_pages = 10
 
-        yield scrapy.Request(url=urls[0], callback=self.get_urls)
+        for x in urls:
+            yield scrapy.Request(url=x, callback=self.get_urls)
+        
 
 
     def get_urls(self, response):
@@ -46,4 +56,7 @@ class MemeSpider(scrapy.Spider):
         item['image_urls'] = image_urls
         item['image_names'] = meme_title
         return item
+    
+    def parse_img(self, response):
+        print(response.url)
 
